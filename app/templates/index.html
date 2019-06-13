@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block app_content %}
+    {% for task in tasks %}
+    <br>
+        {% include '_task.html' %}
+        
+    {% endfor %}
+{% endblock %}

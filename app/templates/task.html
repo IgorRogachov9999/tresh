@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block app_content %}
+<table>
+        <tr>
+            <td><p>Task: {{ task['task'].id }} <br>
+                Customer: <a href="{{url_for('main.profile', username=task['customer'].username)}}">{{ task['customer'].username }}</a> <br>
+                Executor: <a href="{{url_for('main.profile', username=task['executor'].username)}}">{% if task['executor']%} {{ task['executor'].username }} {% endif %}</a> <br>
+                From: {{ moment(task['task'].create_time).format('LLL') }} <br>
+                Status: {% if task['task'].executor == -1 %} Wait {% else %} {% if task['task'].is_end %}In Process {% else %} Done {% endif %} {% endif %} <br>
+                <strong>{{ task['task'].description }}</strong>
+            </p></td>
+        </tr>
+    </table>
+    <div class="row">
+            <div class="col-md-4">
+                {{ wtf.quick_form(form) }}
+            </div>
+        </div>
+{% endblock %}
